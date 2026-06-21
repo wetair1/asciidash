@@ -145,6 +145,8 @@ Remove any you don't want, or reorder them however you like.
   `weather.offline_demo` values and labels them as a demo.
 - CPU usage is sampled from `/proc/stat` between refreshes, so the very first
   frame may show `0%` until a delta is available.
+- Tip: drop `python3 dash.py --once` into your `.bashrc` or `motd` to print a
+  fresh dashboard frame every time you open a terminal.
 
 ## License
 
