@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "asciidash"
+version = "0.1.0"
+description = "Configurable ASCII system dashboard — clock, CPU, RAM, disk, weather and more."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { file = "LICENSE" }
+authors = [{ name = "wetair1" }]
+keywords = ["dashboard", "ascii", "system", "monitor", "terminal", "tui"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Environment :: Console",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/wetair1/asciidash"
+Repository = "https://github.com/wetair1/asciidash"
+
+[project.scripts]
+asciidash = "asciidash:main"
+
+[tool.setuptools]
+py-modules = ["asciidash"]
