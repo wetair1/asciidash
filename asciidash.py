@@ -58,7 +58,7 @@ DEFAULT_CONFIG = {
         "top": ["clock"],
         "columns": [
             ["weather", "cpu", "memory", "disk"],
-            ["host", "calendar", "quote"],
+            ["daynight", "host", "calendar", "quote"],
         ],
     },
     "quotes": [
@@ -550,10 +550,74 @@ def w_quote(cfg, state, innerw):
     return ("QUOTE", lines)
 
 
+# ===================== Время суток (солнце / луна) =====================
+SKY_ART = {
+    "dawn": ([
+        "      |      ",
+        "   .  |  .   ",
+        " --  (O)  -- ",
+        " ___________ ",
+        "   sunrise   ",
+    ], "warn"),
+    "day": ([
+        "    .  |  .    ",
+        "   --     --   ",
+        "  --  (O)  --  ",
+        "   --     --   ",
+        "    '  |  '    ",
+    ], "warn"),
+    "dusk": ([
+        "      |      ",
+        "   '  |  '   ",
+        " --  (O)  -- ",
+        " ~~~~~~~~~~~ ",
+        "   sunset    ",
+    ], "bad"),
+    "night": ([
+        "  *    ___    ",
+        "     ,'   '.  ",
+        "    (  o  )   ",
+        "     '._.'  * ",
+        "   .     *    ",
+    ], "accent"),
+}
+
+PHASE_LABEL = {
+    "dawn": "Dawn",
+    "day": "Daytime",
+    "dusk": "Dusk",
+    "night": "Night",
+}
+
+
+def time_phase(hour):
+    if 5 <= hour < 8:
+        return "dawn"
+    if 8 <= hour < 18:
+        return "day"
+    if 18 <= hour < 21:
+        return "dusk"
+    return "night"
+
+
+def w_daynight(cfg, state, innerw):
+    now = datetime.datetime.now()
+    phase = time_phase(now.hour)
+    art, role = SKY_ART[phase]
+    lines = []
+    for r in art:
+        pad = max(0, (innerw - len(r)) // 2)
+        lines.append([(" " * pad + r, role)])
+    label = PHASE_LABEL[phase] + "  ·  " + now.strftime("%H:%M")
+    pad = max(0, (innerw - len(label)) // 2)
+    lines.append([(" " * pad + label, "value")])
+    return ("TIME OF DAY", lines)
+
+
 WIDGETS = {
     "clock": w_clock, "cpu": w_cpu, "memory": w_memory, "disk": w_disk,
     "host": w_host, "weather": w_weather, "calendar": w_calendar,
-    "quote": w_quote,
+    "quote": w_quote, "daynight": w_daynight,
 }
 
 
