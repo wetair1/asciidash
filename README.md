@@ -1,6 +1,8 @@
 
 # asciidash
 
+![python](https://img.shields.io/badge/python-3.8%2B-blue) ![deps](https://img.shields.io/badge/dependencies-0-success) ![license](https://img.shields.io/badge/license-MIT-green) ![platform](https://img.shields.io/badge/platform-terminal-lightgrey)
+
 A configurable ASCII **info dashboard** for your terminal. One screen that
 live-updates with a big ASCII clock, date, CPU / RAM / disk load, uptime, host
 info, weather, a mini calendar and a quote of the day — all wrapped in tidy
@@ -28,7 +30,7 @@ System stats are read straight from `/proc`, so it runs anywhere with no setup.
 
 ## Requirements
 
-- Python 3.7+
+- Python 3.8+
 - A terminal with 256-color / truecolor support
 - Linux for the system widgets (CPU / mem / uptime read from `/proc`).
   On macOS the clock, calendar, weather, disk and quote widgets still work.
